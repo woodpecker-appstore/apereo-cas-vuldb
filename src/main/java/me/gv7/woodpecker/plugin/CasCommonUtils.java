@@ -92,7 +92,7 @@ public class CasCommonUtils {
 
     protected static KeyStore createAndPrepareKeyStore() {
         KeyStoreFactoryBean ksFactory = new KeyStoreFactoryBean();
-        URL u = CasCommonUtils.class.getClassLoader().getResource("/etc/keystore.jceks");
+        URL u = CasCommonUtils.class.getClassLoader().getResource("etc/keystore.jceks");
         assert u != null;
         ksFactory.setResource(new URLResource(u));
         ksFactory.setType("JCEKS");
