@@ -7,19 +7,20 @@ import me.gv7.woodpecker.plugin.pocs.CasPoc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasRCE implements IPlugin{
+public class CasRCE implements IVulPlugin{
 
-    public static IExtenderCallbacks callbacks;
+    public static IVulPluginCallbacks callbacks;
     public static IPluginHelper pluginHelper;
-    @Override
-    public void PluginMain(IExtenderCallbacks callbacks) {
-        CasRCE.callbacks = callbacks;
-        CasRCE.pluginHelper = callbacks.getPluginHelper();
 
-        callbacks.setPluginName("CAS execute RCE");
+    @Override
+    public void VulPluginMain(IVulPluginCallbacks vulPluginCallbacks) {
+        callbacks = vulPluginCallbacks;
+        pluginHelper = callbacks.getPluginHelper();
+
+        callbacks.setVulPluginName("CAS execute RCE");
         callbacks.setVulName("CAS反序列化一条龙");
-        callbacks.setPluginAutor("Frost Blue");
-        callbacks.setPluginVersion("0.1.0");
+        callbacks.setVulPluginAuthor("Frost Blue");
+        callbacks.setVulPluginVersion("0.1.0");
         callbacks.setVulProduct("Apereo CAS");
         callbacks.setVulSeverity("high");
         callbacks.setVulId("woodpecker-2016-0408");

