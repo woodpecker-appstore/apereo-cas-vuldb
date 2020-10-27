@@ -1,11 +1,6 @@
 package me.gv7.woodpecker.plugin.payloads;
 
 import me.gv7.woodpecker.plugin.*;
-import org.cryptacular.util.CodecUtil;
-import org.jasig.spring.webflow.plugin.EncryptedTranscoder;
-import ys.payloads.ObjectPayload;
-
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +40,10 @@ public class CasPayloadGenerate implements IPayloadGenerator {
         iResultOutput = result;
         String className = customArgs.get("gadge");
         String command = customArgs.get("command");
-        result.rawPrintln("\n\n调用类: "+className+"\ncommand: "+command+"\n");
-        result.successPrintln(CasCommonUtils.generate(className, command));
+
+        result.successPrintln(String.format("gadget: %s command: %s",className,command));
+        result.rawPrintln("\n");
+        result.rawPrintln(CasCommonUtils.generate(className, command));
+        result.rawPrintln("\n");
     }
-
-
 }
