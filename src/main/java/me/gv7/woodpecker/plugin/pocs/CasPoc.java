@@ -8,7 +8,7 @@ import java.util.*;
 public class CasPoc implements IPoc {
 
     @Override
-    public IScanResult doCheck(ITarget target, IResultOutput iResultOutput) {
+    public IScanResult doVerify(ITarget target, IResultOutput iResultOutput) {
         final IScanResult scanResult = CasRCE.pluginHelper.createScanResult();
 
         String httpAddress = CasCommonUtils.checkUrl(target.getAddress());
