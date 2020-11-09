@@ -20,7 +20,7 @@ public class CasRCE implements IVulPlugin{
         callbacks.setVulPluginName("CAS execute RCE");
         callbacks.setVulName("CAS反序列化一条龙");
         callbacks.setVulPluginAuthor("Frost Blue");
-        callbacks.setVulPluginVersion("0.1.0");
+        callbacks.setVulPluginVersion("0.1.1");
         callbacks.setVulProduct("Apereo CAS");
         callbacks.setVulSeverity("high");
         callbacks.setVulId("woodpecker-2016-0408");
