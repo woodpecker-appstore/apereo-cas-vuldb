@@ -18,11 +18,11 @@ public class CasRCE implements IVulPlugin{
         callbacks = vulPluginCallbacks;
         pluginHelper = callbacks.getPluginHelper();
 
-        callbacks.setVulPluginName("CAS execute RCE");
-        callbacks.setVulName("CAS反序列化一条龙");
+        callbacks.setVulPluginName("Apereo cas execution deserial exploit");
+        callbacks.setVulName("Apereo cas execution deserial");
         callbacks.setVulPluginAuthor("Frost Blue");
-        callbacks.setVulPluginVersion("0.1.2");
-        callbacks.setVulProduct("Apereo CAS");
+        callbacks.setVulPluginVersion("0.2.0");
+        callbacks.setVulProduct("Apereo cas");
         callbacks.setVulSeverity("high");
         callbacks.setVulId("woodpecker-2016-0408");
 
