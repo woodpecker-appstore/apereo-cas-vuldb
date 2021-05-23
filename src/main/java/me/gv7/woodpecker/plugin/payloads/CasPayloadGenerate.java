@@ -25,8 +25,8 @@ public class CasPayloadGenerate implements IPayloadGenerator {
         final IArg shellType = CasRCE.callbacks.getPluginHelper().createArg();
         shellType.setName("command");
         shellType.setDefaultValue("TomcatFilterWebshell");
-        gadge.setRequired(true);
-        gadge.setDescription("以后会添加spring的内存马");
+        shellType.setRequired(true);
+        shellType.setDescription("以后会添加spring的内存马");
 
         args.add(gadge);
         args.add(shellType);
