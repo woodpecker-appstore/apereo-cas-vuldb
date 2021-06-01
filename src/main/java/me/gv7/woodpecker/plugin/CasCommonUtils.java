@@ -8,7 +8,7 @@ import org.cryptacular.generator.sp80038a.RBGNonce;
 import org.cryptacular.io.URLResource;
 import org.cryptacular.spec.BufferedBlockCipherSpec;
 import org.cryptacular.util.CodecUtil;
-import ys.payloads.ObjectPayload;
+import me.gv7.woodpecker.yso.payloads.ObjectPayload;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class CasCommonUtils {
     }
 
     public static boolean basicCheckVuln(String targetURL, IResultOutput result){
-        String s = Requests.get(targetURL).verify(false).send().readToText();
+        String s = Requests.get(targetURL).verify(false).followRedirect(true).send().readToText();
         if (s.contains("_AAAA")){
             return true;
         }else if (s.contains("s1\"")){
@@ -44,7 +44,7 @@ public class CasCommonUtils {
     }
 
     public static boolean basicCheckVuln(String targetURL){
-        String s = Requests.get(targetURL).verify(false).send().readToText();
+        String s = Requests.get(targetURL).verify(false).followRedirect(true).send().readToText();
         return s.contains("_AAAA");
     }
 
