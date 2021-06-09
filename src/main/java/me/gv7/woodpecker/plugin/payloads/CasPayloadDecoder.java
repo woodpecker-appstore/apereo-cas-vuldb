@@ -6,7 +6,7 @@ import org.cryptacular.bean.KeyStoreFactoryBean;
 import org.cryptacular.generator.sp80038a.RBGNonce;
 import org.cryptacular.io.URLResource;
 import org.cryptacular.spec.BufferedBlockCipherSpec;
-import sun.misc.BASE64Decoder;
+import me.gv7.woodpecker.tools.codec.BASE64Decoder;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
