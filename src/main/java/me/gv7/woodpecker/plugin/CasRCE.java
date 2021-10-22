@@ -20,11 +20,11 @@ public class CasRCE implements IVulPlugin{
 
         callbacks.setVulPluginName("Apereo cas execution deserial exploit");
         callbacks.setVulName("Apereo cas execution deserial");
-        callbacks.setVulPluginAuthor("ppsoft1991&c0ny1");
-        callbacks.setVulPluginVersion("0.2.0");
+        callbacks.setVulPluginAuthor("ppsoft1991 c0ny1");
+        callbacks.setVulPluginVersion("0.3.0");
         callbacks.setVulProduct("Apereo cas");
         callbacks.setVulSeverity(IVulPluginCallbacks.VUL_CATEGORY_RCE);
-        callbacks.setVulId("woodpecker-2016-0408");
+        callbacks.setVulId("");
 
         final List<IPayloadGenerator> payloadGeneratorList = new ArrayList<IPayloadGenerator>();
         payloadGeneratorList.add(new CasPayloadGenerate());

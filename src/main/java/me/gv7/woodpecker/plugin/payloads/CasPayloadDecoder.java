@@ -21,7 +21,7 @@ import java.util.zip.GZIPInputStream;
 public class CasPayloadDecoder implements IPayloadGenerator {
     @Override
     public String getPayloadTabCaption() {
-        return "CAS execute decoder";
+        return "4.1.x-4.1.6 decrypter";
     }
 
     @Override

