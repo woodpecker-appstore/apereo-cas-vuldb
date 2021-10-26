@@ -1,22 +1,23 @@
-package me.gv7.woodpecker.plugin;
+package me.gv7.woodpecker.vuldb.execution.deserial;
 
-import me.gv7.woodpecker.plugin.exploits.CasExploit;
-import me.gv7.woodpecker.plugin.payloads.CasPayloadDecoder;
-import me.gv7.woodpecker.plugin.payloads.CasPayloadGenerate;
-import me.gv7.woodpecker.plugin.pocs.CasPoc;
+import me.gv7.woodpecker.plugin.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasRCE implements IVulPlugin{
+public class VulPluginImpl implements IVulPlugin {
 
     public static IVulPluginCallbacks callbacks;
     public static IPluginHelper pluginHelper;
+    public static IDNSLog idnsLog;
+    public static IHttpLog iHttpLog;
 
     @Override
     public void VulPluginMain(IVulPluginCallbacks vulPluginCallbacks) {
         callbacks = vulPluginCallbacks;
         pluginHelper = callbacks.getPluginHelper();
+        idnsLog = callbacks.getDNSLogManager();
+        iHttpLog = callbacks.getHttpLogManager();
 
         callbacks.setVulPluginName("Apereo cas execution deserial exploit");
         callbacks.setVulName("Apereo cas execution deserial");
@@ -27,14 +28,15 @@ public class CasRCE implements IVulPlugin{
         callbacks.setVulId("");
 
         final List<IPayloadGenerator> payloadGeneratorList = new ArrayList<IPayloadGenerator>();
-        payloadGeneratorList.add(new CasPayloadGenerate());
-        payloadGeneratorList.add(new CasPayloadDecoder());
+        payloadGeneratorList.add(new EncrpytPayloadGenerate());
+        payloadGeneratorList.add(new DecryptPayloadGenerator());
         callbacks.registerPayloadGenerator(payloadGeneratorList);
 
         final List<IExploit> exploitsList = new ArrayList<>();
-        exploitsList.add(new CasExploit());
+        exploitsList.add(new EchoExecuteCommandExploit());
+        exploitsList.add(new CustomSerialDataExploit());
         callbacks.registerExploit(exploitsList);
 
-        callbacks.registerPoc(new CasPoc());
+        callbacks.registerPoc(new PocImpl());
     }
 }

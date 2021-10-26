@@ -38,6 +38,36 @@
       <version>0.2.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>me.gv7.woodpecker</groupId>
+      <artifactId>woodpecker-requests</artifactId>
+      <version>0.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>me.gv7.woodpecker</groupId>
+      <artifactId>ysoserial-for-woodpecker</artifactId>
+      <version>0.4.4</version>
+      <scope>system</scope>
+      <systemPath>/Users/c0ny1/software/sectools/woodpecker-framework/common/ysoserial-for-woodpecker-0.4.4-all.jar</systemPath>
+    </dependency>
+
+      <dependency>
+          <groupId>me.gv7.woodpecker</groupId>
+          <artifactId>woodpecker-tools</artifactId>
+          <version>0.1.0.beta1</version>
+          <scope>compile</scope>
+      </dependency>
+
+    <dependency>
+      <groupId>me.gv7.jevilcode</groupId>
+      <artifactId>jEvilCode</artifactId>
+      <version>0.1.0</version>
+      <scope>system</scope>
+      <systemPath>/Users/c0ny1/Downloads/jEvilCode/out/artifacts/jEvilCode_jar/jEvilCode.jar</systemPath>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.cryptacular/cryptacular -->
     <dependency>
       <groupId>org.cryptacular</groupId>
@@ -51,29 +81,6 @@
       <artifactId>spring-webflow-client-repo</artifactId>
       <version>1.0.3</version>
     </dependency>
-
-
-    <dependency>
-      <groupId>me.gv7.woodpecker</groupId>
-      <artifactId>woodpecker-requests</artifactId>
-      <version>0.2.0</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>me.gv7.woodpecker</groupId>
-      <artifactId>ysoserial-for-woodpecker</artifactId>
-      <version>0.1.1</version>
-      <scope>system</scope>
-      <systemPath>/Users/c0ny1/software/sectools/woodpecker-framework/common/ysoserial-for-woodpecker-0.4.3-all.jar</systemPath>
-    </dependency>
-
-      <dependency>
-          <groupId>me.gv7.woodpecker</groupId>
-          <artifactId>woodpecker-tools</artifactId>
-          <version>0.1.0.beta1</version>
-          <scope>compile</scope>
-      </dependency>
 
   </dependencies>
 

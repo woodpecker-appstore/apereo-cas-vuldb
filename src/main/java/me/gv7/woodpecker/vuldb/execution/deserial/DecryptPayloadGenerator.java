@@ -1,4 +1,4 @@
-package me.gv7.woodpecker.plugin.payloads;
+package me.gv7.woodpecker.vuldb.execution.deserial;
 
 import me.gv7.woodpecker.plugin.*;
 import org.cryptacular.bean.BufferedBlockCipherBean;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
-public class CasPayloadDecoder implements IPayloadGenerator {
+public class DecryptPayloadGenerator implements IPayloadGenerator {
     @Override
     public String getPayloadTabCaption() {
         return "4.1.x-4.1.6 decrypter";
@@ -26,9 +26,9 @@ public class CasPayloadDecoder implements IPayloadGenerator {
 
     @Override
     public IArgsUsageBinder getPayloadCustomArgs() {
-        IArgsUsageBinder binder = CasRCE.callbacks.getPluginHelper().createArgsUsageBinder();
+        IArgsUsageBinder binder = VulPluginImpl.callbacks.getPluginHelper().createArgsUsageBinder();
         final List<IArg> args = new ArrayList<IArg>();
-        final IArg gadge = CasRCE.pluginHelper.createArg();
+        final IArg gadge = VulPluginImpl.pluginHelper.createArg();
         gadge.setName("execute");
         gadge.setDefaultValue("39a0a1ff-9397-499b-b419-3094da3ac42f_AAAAIgAAA...");
         gadge.setDescription("execute参数值");
@@ -54,7 +54,7 @@ public class CasPayloadDecoder implements IPayloadGenerator {
         try {
             decryptData = decryptCASExecute(base64Data);
         } catch (Exception e) {
-            resultOutput.errorPrintln(CasRCE.pluginHelper.getThrowableInfo(e));
+            resultOutput.errorPrintln(VulPluginImpl.pluginHelper.getThrowableInfo(e));
             return;
         }
         resultOutput.successPrintln("Decode payload success");
@@ -66,7 +66,7 @@ public class CasPayloadDecoder implements IPayloadGenerator {
     public static byte[] decryptCASExecute(String execute) throws Exception{
         byte[] encodeByte = new BASE64Decoder().decodeBuffer(execute);
         KeyStoreFactoryBean ksFactory = new KeyStoreFactoryBean();
-        URL u = CasPayloadDecoder.class.getClassLoader().getResource("etc/keystore.jceks");
+        URL u = DecryptPayloadGenerator.class.getClassLoader().getResource("etc/keystore.jceks");
         ksFactory.setResource(new URLResource(u));
         ksFactory.setType("JCEKS");
         ksFactory.setPassword("changeit");

